@@ -1,0 +1,22 @@
+Field,Content
+Region Code,"Modified PSGC code of the Region. This is a two-digit code number that identifies a specific region. It ranges from 01 to 99. Generally, the Region Code corresponds to the Region number (e.g., Region Code 01 refers to Region 1, 02 refers to Region 2, etc.)"
+Region,Source of the PSGC code for the Region
+Province Code,"Modified PSGC code of the Province. This is a two-digit code number that identifies the province.  A Province Code is independent from a Region Code. This means that even if the province is transferred to another region, its Province Code remains the same."
+Province,Source of the PSGC code for the Province
+City_Mun Code,"Modified PSGC code of the City/Municipality. This is a two-digit code that generally defines the relative alphabetical sequence of the municipalities within the province. It ranges from 01 to 99. Municipality Code 01 means it is the first municipality in alphabetical sequence within that province. The Municipality Code is dependent upon the Province Code to fully establish the identity of municipality. This two-digit code is used to identify the municipalities, cities or municipal districts in a particular province. In the case of the first regional district (City of Manila) of Metropolitan Manila Area (National Capital Region), the fourteen city districts of the City of Manila are treated as municipalities"
+City_Municipality,Source of the PSGC code for the City/Municipality. 
+,
+Glossary of terms,https://psa.gov.ph/poverty-press-releases/glossary
+Poverty estimation methodoloy,"For details of poverty estimation methodology, kindly access the following links:
+
+https://psa.gov.ph/poverty-sae-press-releases
+https://psa.gov.ph/sites/default/files/Technical%20Notes%20on%202015%20SAE.pdf
+https://psa.gov.ph/sites/default/files/NSCB%20Reso%209%2C%20S2011.pdf
+https://psa.gov.ph/sites/default/files/NSCBReso9Annex.pdf"
+Poverty data,"https://psa.gov.ph/poverty-sae-press-releases/data
+https://psa.gov.ph/poverty-press-releases/data/2015%20Full%20Year%20Poverty%20Statistics"
+Technical notes,https://psa.gov.ph/poverty-press-releases/technotes
+,
+Notes:,"1. ""PH"" in front of the PSGC coding scheme in order to solve the problem of the ""0"" that falls in several application  
+2. The standard deviation of an estimate can be derived by multiplying the poverty incidence and coefficient of variation then divide by 100. 
+3. The Municipality of Bumbaran, Lanao del Sur was renamed as Municipality of Amai Manabilang per Muslim Mindanao Autonomy Acto No. 316, series of 2014 and was ratified through a plebiscite on 07 April 2018."
