@@ -76,11 +76,15 @@ def get_plot_by_region(dataframe, year: str):
         fig.update_geos(fitbounds = 'locations', visible = False,)
         
         fig.update_layout(
+            coloraxis=dict(colorbar=dict(orientation='h', y=-0.15)),
             coloraxis_colorbar = dict(title = 'Magnitude'), 
             margin={"r":0,"t":0,"l":0,"b":0}, 
             paper_bgcolor = 'rgba(0,0,0,0)', 
             plot_bgcolor = 'rgba(0,0,0,0)',
-            geo = dict(bgcolor = 'rgba(0,0,0,0)', ), )
+            geo = dict(bgcolor = 'rgba(0,0,0,0)', ), 
+            modebar_bgcolor = 'rgba(0,0,0,0)',
+            modebar_color = '#6d0006',
+            modebar_activecolor = '#323140')
         
         save_fig_binary(figure = fig, file_name = file_name, folder_name = folder_name)
         return fig
@@ -110,7 +114,8 @@ def get_plot_by_province(dataframe, year: str, region_name: str):
             color = year_by_column_name[year],
             scope = 'asia',
             color_continuous_scale = px.colors.sequential.Reds, 
-            custom_data = ['Province', 'Province code', year_by_column_name[year]])
+            custom_data = ['Province', 'Province code', year_by_column_name[year]],
+            basemap_visible=False, )
 
         fig.update_traces(
             hovertemplate = '<br>'.join([
@@ -122,12 +127,27 @@ def get_plot_by_province(dataframe, year: str, region_name: str):
         fig.update_geos(fitbounds = 'locations', visible = False,)
         
         fig.update_layout(
+            coloraxis=dict(colorbar=dict(orientation='h', y=-0.15)),
             coloraxis_colorbar = dict(title = 'Magnitude'), 
             margin={"r":0,"t":0,"l":0,"b":0}, 
             paper_bgcolor = 'rgba(0,0,0,0)', 
             plot_bgcolor = 'rgba(0,0,0,0)',
-            geo = dict(bgcolor = 'rgba(0,0,0,0)', ), )
-
+            geo = dict(bgcolor = 'rgba(0,0,0,0)', ), 
+            modebar_bgcolor = 'rgba(0,0,0,0)',
+            modebar_color = '#6d0006',
+            modebar_activecolor = '#323140')
 
         save_fig_binary(figure = fig, file_name = file_name, folder_name = folder_name)
         return fig
+    
+
+def generate_binary_figures():
+    years = [year for year in year_by_column_name.keys()]
+    region_names = [region_name for region_name in region_name_by_region_code.keys()]
+
+    for year in years:
+        get_plot_by_region(df, year)
+        for region_name in region_names:
+            get_plot_by_province(df, year, region_name)
+
+    
