@@ -42,8 +42,9 @@ def get_year_by_column_name() -> dict:
 def get_region_name_by_region_code():
     return region_name_by_region_code
 
-def plot_by_region(dataframe, year: str):
-    file_name = 'by_region'
+@st.cache_data
+def get_plot_by_region(dataframe, year: str):
+    file_name = f'by_region_{year}'
     folder_name = 'regions'
 
     fig = load_fig_binary(file_name = file_name, folder_name = folder_name)
@@ -73,15 +74,21 @@ def plot_by_region(dataframe, year: str):
         )
 
         fig.update_geos(fitbounds = 'locations', visible = False,)
-        fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-
+        
+        fig.update_layout(
+            coloraxis_colorbar = dict(title = 'Magnitude'), 
+            margin={"r":0,"t":0,"l":0,"b":0}, 
+            paper_bgcolor = 'rgba(0,0,0,0)', 
+            plot_bgcolor = 'rgba(0,0,0,0)',
+            geo = dict(bgcolor = 'rgba(0,0,0,0)', ), )
+        
         save_fig_binary(figure = fig, file_name = file_name, folder_name = folder_name)
         return fig
     
-
-def plot_by_province(dataframe, year: str, region_name: str):
+@st.cache_data
+def get_plot_by_province(dataframe, year: str, region_name: str):
     region_code = region_name_by_region_code[region_name]
-    file_name = f'by_region_{region_code}'
+    file_name = f'by_region_{region_code}_{year}'
     folder_name = 'provinces'
 
     fig = load_fig_binary(file_name = file_name, folder_name = folder_name)
@@ -113,7 +120,14 @@ def plot_by_province(dataframe, year: str, region_name: str):
         )
 
         fig.update_geos(fitbounds = 'locations', visible = False,)
-        fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+        
+        fig.update_layout(
+            coloraxis_colorbar = dict(title = 'Magnitude'), 
+            margin={"r":0,"t":0,"l":0,"b":0}, 
+            paper_bgcolor = 'rgba(0,0,0,0)', 
+            plot_bgcolor = 'rgba(0,0,0,0)',
+            geo = dict(bgcolor = 'rgba(0,0,0,0)', ), )
+
 
         save_fig_binary(figure = fig, file_name = file_name, folder_name = folder_name)
         return fig
