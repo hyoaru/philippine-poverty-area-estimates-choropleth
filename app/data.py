@@ -141,13 +141,6 @@ def get_plot_by_province(dataframe, year: str, region_name: str):
         return fig
     
 
-def generate_binary_figures():
-    years = [year for year in year_by_column_name.keys()]
-    region_names = [region_name for region_name in region_name_by_region_code.keys()]
 
-    for year in years:
-        get_plot_by_region(df, year)
-        for region_name in region_names:
-            get_plot_by_province(df, year, region_name)
 
     
