@@ -61,4 +61,7 @@ with st.container():
                     region_name = province_visualize_by, )
                 st.plotly_chart(figure, use_container_width = True, theme = 'streamlit')
 
+    with st.container():
+        st.caption('© 2023 [hyoaru](https://hyoaru.github.io). All Rights Reserved.')
+
 
