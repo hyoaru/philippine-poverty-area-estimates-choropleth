@@ -51,7 +51,7 @@ with st.container():
             figure = get_plot_by_region(
                 dataframe = df, 
                 year = year_by_option, )
-            st.plotly_chart(figure, use_container_width = True)
+            st.plotly_chart(figure, use_container_width = True, theme = 'streamlit')
 
         elif visualize_by_option == 'Province':
             if province_visualize_by != 'Select province':
@@ -59,6 +59,6 @@ with st.container():
                     dataframe = df,
                     year = year_by_option, 
                     region_name = province_visualize_by, )
-                st.plotly_chart(figure, use_container_width = True)
+                st.plotly_chart(figure, use_container_width = True, theme = 'streamlit')
 
 
