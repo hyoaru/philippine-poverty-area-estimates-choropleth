@@ -11,6 +11,13 @@ from app.utilities import load_fig_binary, save_fig_binary
 
 df = pd.read_csv(r'data/csv/poverty_statistics_clnd.csv')
 
+region_codes_ordered = [region_code for region_code in df['Region code'].unique()]
+region_codes_ordered.sort()
+
+df['Region code'] = pd.Categorical(
+    df['Region code'], categories = region_codes_ordered,
+    ordered = True, )
+
 columns_to_include = [
     x for x in df.columns 
     if not (x.startswith('Poverty') or x.startswith('Annual'))]
@@ -23,10 +30,13 @@ year_by_column_name = dict(zip(
     ['2006', '2009', '2012', '2015'], 
     magnitude_pf_est_by_year_column_names))
 
-region_name_by_region_code = {}
-for name, code in df[['Region', 'Region code']].value_counts().to_frame().index:
-    region_name_by_region_code.update({name: code})
-
+region_name_by_region_code = dict(
+    df[['Region', 'Region code']]
+    .value_counts()
+    .reset_index()
+    .iloc[:, [0,1]]
+    .sort_values('Region code')
+    .values)
 
 # Functions
 
