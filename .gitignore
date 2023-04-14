@@ -1,6 +1,7 @@
 # Directories
 /.venv/
 __pycache__/
+/test/
 
 # Files
 deploy.py
