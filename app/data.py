@@ -26,9 +26,17 @@ magnitude_pf_est_by_year_column_names = [
     x for x in columns_to_include 
     if x.startswith('Magnitude')]
 
+total_magnitude_pf_est_by_year_column_names = [
+    x for x in columns_to_include 
+    if x.startswith('Total')]
+
 year_by_column_name = dict(zip(
     ['2006', '2009', '2012', '2015'], 
     magnitude_pf_est_by_year_column_names))
+
+year_by_column_name_total = dict(zip(
+    ['2006', '2009', '2012', '2015'], 
+    total_magnitude_pf_est_by_year_column_names))
 
 region_name_by_region_code = dict(
     df[['Region', 'Region code']]
@@ -47,6 +55,10 @@ def get_dataframe() -> pd.DataFrame:
 @st.cache_data
 def get_year_by_column_name() -> dict:
     return year_by_column_name
+
+@st.cache_data
+def get_year_by_column_name_total() -> dict:
+    return year_by_column_name_total
 
 @st.cache_data
 def get_region_name_by_region_code():
@@ -84,17 +96,16 @@ def get_plot_by_region(dataframe, year: str):
             geojson = geojson_file,
             featureidkey = 'properties.ADM1_PCODE',
             locations = 'Region code',
-            color = year_by_column_name[year],
+            color = year_by_column_name_total[year],
             scope = 'asia',
             color_continuous_scale = px.colors.sequential.Reds, 
-            custom_data = ['Region', 'Region code', year_by_column_name[year]])
+            custom_data = ['Region', 'Region code', year_by_column_name_total[year]])
 
         fig.update_traces(
             hovertemplate = '<br>'.join([
                 'Region: %{customdata[0]}', 
                 'Region code: %{customdata[1]}',
-                '<b>Magnitude of poor families estimation: %{customdata[2]:,}</b>' ]),
-        )
+                '<b>Magnitude of poor families estimation: %{customdata[2]:,}</b>' ]), )
 
         fig.update_geos(fitbounds = 'locations', visible = False,)
         
@@ -135,8 +146,7 @@ def get_plot_by_province(dataframe, year: str, region_name: str):
             hovertemplate = '<br>'.join([
                 'Province: %{customdata[0]}', 
                 'Province code: %{customdata[1]}',
-                '<b>Magnitude of poor families estimation: %{customdata[2]:,}</b>' ]),
-        )
+                '<b>Magnitude of poor families estimation: %{customdata[2]:,}</b>' ]), )
 
         fig.update_geos(fitbounds = 'locations', visible = False,)
         
